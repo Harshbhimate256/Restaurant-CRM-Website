@@ -4,3 +4,5 @@ client/node_modules
 mongoDB cluster password= ZCuijhT8xLFFxOKJ
 
 workflow-CRM.txt
+
+.env
