@@ -203,7 +203,8 @@ export const generateBill = async(req,res)=>{
 
     //fetching latest order placed by user
     const order = await orderModel.findOne({customer:userId})
-    .sort({orderTime: -1}) //for fetching the most recent order
+    .sort({orderTime: -1}) //for fetching the most recent order (it is fetching in descending order i.e -1 means  most recent with respect to orderTime)
+
     .populate("items.item") //item field populated
 
 
@@ -211,7 +212,8 @@ export const generateBill = async(req,res)=>{
       return res.status(404).json({message: "no order found"})
     }
 
-
+    //accumulating the total cost of the order with acc as params (it store each item total if there are multiple items)
+    //item as params represents the current item being processed in array
     const itemsTotal = order.items.reduce((acc, item) => {
       return acc + item.quantity * item.item.price;
       }, 0);

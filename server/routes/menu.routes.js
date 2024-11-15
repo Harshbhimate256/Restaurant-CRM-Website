@@ -4,7 +4,7 @@ import {getItems, getSpecificItem} from "../controllers/menu.controller.js";
 import { customer } from "../middleware/customerAuth.js";
 const router = express.Router();
 
-//for displaying the menu
+//for displaying the menu (only for customer)
 //menu/show/item
 router.get('/show/item',protectedRoute, customer,getItems)
 

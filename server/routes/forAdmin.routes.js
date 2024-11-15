@@ -2,7 +2,7 @@ import express from "express";
 import { addItem, deleteItem, getItems, updateItem, updateOrderStatus } from "../controllers/menu.controller.js";
 import { admin } from "../middleware/adminAuth.js";
 import protectedRoute from "../middleware/authProtected.js";
-import { allOrders } from "../controllers/admin.controller.js";
+import { allCustomers, allOrders } from "../controllers/admin.controller.js";
 const router = express.Router();
 
 
@@ -25,20 +25,24 @@ router.put('/update/item/:id',protectedRoute,admin,updateItem)
 //admin/delete/:item id
 router.delete('/delete/:id',protectedRoute,admin,deleteItem)
 
-//for fetching all orders of customers
-//admin/all/orders
-router.get('/all/orders',protectedRoute,admin,allOrders)
-
-
-
-
-
+//for updating the order status 
+//admin/update/order/status
+router.put('/update/order/status',protectedRoute,admin,updateOrderStatus)
 
 
 
 /*---------This is under admin controller ------------*/
-//for updating the order status 
-//admin/update/order/status
-router.put('/update/order/status',protectedRoute,admin,updateOrderStatus)
+
+//for fetching all orders of customers
+//admin/all/orders
+router.get('/all/orders',protectedRoute,admin,allOrders)
+
+//for fetching all the customers
+//admin/all/customers
+router.get('/all/customers',protectedRoute,admin,allCustomers)
+
+
+//for fetching all the orders made by each customer
+//admin/all/orders/customer id
 
 export default router; 
